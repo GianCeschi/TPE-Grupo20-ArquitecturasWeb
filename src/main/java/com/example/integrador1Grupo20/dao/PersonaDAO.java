@@ -1,4 +1,4 @@
-package com.example.ejemplodaoypatrones.dao;
+/*package com.example.ejemplodaoypatrones.dao;
 
 import com.example.ejemplodaoypatrones.dto.PersonaDTO;
 
@@ -137,3 +137,4 @@ public class PersonaDAO {
     }
 
 }
+*/

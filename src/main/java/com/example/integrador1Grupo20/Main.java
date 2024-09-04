@@ -1,10 +1,10 @@
-package com.example.ejemplodaoypatrones;
+package com.example.integrador1Grupo20;
 
-import com.example.ejemplodaoypatrones.dao.DireccionDAO;
-import com.example.ejemplodaoypatrones.dao.PersonaDAO;
-import com.example.ejemplodaoypatrones.dto.PersonaDTO;
-import com.example.ejemplodaoypatrones.factory.AbstractFactory;
-import com.example.ejemplodaoypatrones.utils.HelperMySQL;
+//import com.example.ejemplodaoypatrones.dao.DireccionDAO;
+//import com.example.ejemplodaoypatrones.dao.PersonaDAO;
+//import com.example.ejemplodaoypatrones.dto.PersonaDTO;
+//import com.example.ejemplodaoypatrones.factory.AbstractFactory;
+import com.example.integrador1Grupo20.utils.HelperMySQL;
 
 import java.util.List;
 
@@ -17,12 +17,12 @@ public class Main {
         dbMySQL.populateDB();
         dbMySQL.closeConnection();
 
-        AbstractFactory chosenFactory = AbstractFactory.getDAOFactory(1);
+       // AbstractFactory chosenFactory = AbstractFactory.getDAOFactory(1);
         System.out.println();
         System.out.println("////////////////////////////////////////////");
         System.out.println("////////////////////////////////////////////");
         System.out.println();
-        DireccionDAO direccion = chosenFactory.getDireccionDAO();
+ /*       DireccionDAO direccion = chosenFactory.getDireccionDAO();
         PersonaDAO persona = chosenFactory.getPersonaDAO();
 
 
@@ -46,7 +46,7 @@ public class Main {
 //        persona.insertPersona(p);
 
         PersonaDTO personaDTO = persona.findPersonaDTO(2);
-        System.out.println(personaDTO);
+        System.out.println(personaDTO);*/
 
     }
 }

@@ -23,7 +23,7 @@ public class HelperMySQL {
 
     public HelperMySQL() {//Constructor
         String driver = "com.mysql.cj.jdbc.Driver";
-        String uri = "jdbc:mysql://localhost:3306/integrador1";
+        String uri = "jdbc:mysql://localhost:3306/mysqlDB"; //Luego llamar bd integrador1, ahora para probar
 
         try {
             Class.forName(driver).getDeclaredConstructor().newInstance();
@@ -82,7 +82,7 @@ public class HelperMySQL {
                 "idProducto INT NOT NULL, " +
                 "nombre VARCHAR(45), " +
                 "valor FLOAT NOT NULL, " +
-                "CONSTRAINT idProducto_pk PRIMARY KEY (idProducto), ";
+                "CONSTRAINT idProducto_pk PRIMARY KEY (idProducto)) ";
         this.conn.prepareStatement(tableProducto).execute();
         this.conn.commit();
 
@@ -91,15 +91,15 @@ public class HelperMySQL {
                 "idCliente INT NOT NULL, " +
                 "CONSTRAINT idFactura_pk PRIMARY KEY (idFactura), " +
                 "CONSTRAINT FK_idFactura FOREIGN KEY (idCliente) REFERENCES Cliente (idCliente))";
-        this.conn.prepareStatement(tableProducto).execute();
+        this.conn.prepareStatement(tableFactura).execute();
         this.conn.commit();
 
-        String tableFactura_Producto = "CREATE TABLE IF NOT EXISTS Factura_Producto(" + //FALTA TERMINAR
+        String tableFactura_Producto = "CREATE TABLE IF NOT EXISTS Factura_Producto(" +
                 "idFactura INT NOT NULL, " +
                 "idProducto INT NOT NULL, " +
                 "nombre VARCHAR(45), " +
-                "CONSTRAINT idProducto_pk PRIMARY KEY (idProducto), ";
-        this.conn.prepareStatement(tableProducto).execute();
+                "CONSTRAINT idProducto_pk PRIMARY KEY (idProducto)) ";
+        this.conn.prepareStatement(tableFactura_Producto).execute();
         this.conn.commit();
     }
 

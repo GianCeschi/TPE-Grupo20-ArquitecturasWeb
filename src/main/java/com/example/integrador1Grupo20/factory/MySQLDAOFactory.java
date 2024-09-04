@@ -1,4 +1,4 @@
-package com.example.ejemplodaoypatrones.factory;
+/*package com.example.ejemplodaoypatrones.factory;
 
 import com.example.ejemplodaoypatrones.dao.DireccionDAO;
 import com.example.ejemplodaoypatrones.dao.PersonaDAO;
@@ -64,4 +64,4 @@ public class MySQLDAOFactory extends AbstractFactory {
     public DireccionDAO getDireccionDAO() {
         return new DireccionDAO(createConnection());
     }
-}
+}*/

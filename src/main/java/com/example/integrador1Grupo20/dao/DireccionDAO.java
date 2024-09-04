@@ -1,4 +1,4 @@
-package com.example.ejemplodaoypatrones.dao;
+package com.example.integrador1Grupo20.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
 public class DireccionDAO {
     private Connection conn;
 
@@ -77,3 +77,4 @@ public class DireccionDAO {
     }
 
 }
+*/
