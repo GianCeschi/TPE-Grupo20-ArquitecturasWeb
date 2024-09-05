@@ -4,7 +4,7 @@ public class Factura {
     private int idFactura;
     private int idCliente;
 
-    public Factura(int idCliente, int idFactura) {
+    public Factura(int idFactura, int idCliente) {
         this.idCliente = idCliente;
         this.idFactura = idFactura;
     }

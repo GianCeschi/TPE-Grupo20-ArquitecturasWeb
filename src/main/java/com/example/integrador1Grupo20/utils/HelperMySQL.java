@@ -51,6 +51,15 @@ public class HelperMySQL {
         }
     }
     public void dropTables() throws SQLException {
+
+        String dropFactura_Producto = "DROP TABLE IF EXISTS Factura_Producto";
+        this.conn.prepareStatement(dropFactura_Producto).execute();
+        this.conn.commit();
+
+        String dropFactura = "DROP TABLE IF EXISTS Factura";
+        this.conn.prepareStatement(dropFactura).execute();
+        this.conn.commit();
+
         String dropCliente = "DROP TABLE IF EXISTS Cliente";
         this.conn.prepareStatement(dropCliente).execute();
         this.conn.commit();
@@ -59,13 +68,7 @@ public class HelperMySQL {
         this.conn.prepareStatement(dropProducto).execute();
         this.conn.commit();
 
-        String dropFactura = "DROP TABLE IF EXISTS Factura";
-        this.conn.prepareStatement(dropFactura).execute();
-        this.conn.commit();
 
-        String dropFactura_Producto = "DROP TABLE IF EXISTS Factura_Producto";
-        this.conn.prepareStatement(dropFactura_Producto).execute();
-        this.conn.commit();
     }
 
     public void createTables() throws SQLException {
@@ -97,8 +100,8 @@ public class HelperMySQL {
         String tableFactura_Producto = "CREATE TABLE IF NOT EXISTS Factura_Producto(" +
                 "idFactura INT NOT NULL, " +
                 "idProducto INT NOT NULL, " +
-                "nombre VARCHAR(45), " +
-                "CONSTRAINT idProducto_pk PRIMARY KEY (idProducto)) ";
+                "cantidad INT NOT NULL, " +
+                "CONSTRAINT idProducto_pk PRIMARY KEY (idFactura, idProducto)) ";
         this.conn.prepareStatement(tableFactura_Producto).execute();
         this.conn.commit();
     }
@@ -175,12 +178,12 @@ public class HelperMySQL {
             }
             System.out.println("Facturas insertadas");
 
-            for(CSVRecord row : getData("facturas_productos.csv")) {
+            for(CSVRecord row : getData("facturas-productos.csv")) {
                 if(row.size() >= 3) { // Verificar que hay al menos 3 campos en el CSVRecord
                     String idFacturaString = row.get(0);
                     String idProductoString = row.get(1);
                     String cantidadString = row.get(2);
-                    if(!idFacturaString.isEmpty()&& idProductoString.isEmpty() && !cantidadString.isEmpty()) {
+                    if(!idFacturaString.isEmpty()&& !idProductoString.isEmpty() && !cantidadString.isEmpty()) {
                         try {
                             int idFactura = Integer.parseInt(idFacturaString);
                             int idProducto = Integer.parseInt(idProductoString);
@@ -267,7 +270,7 @@ public class HelperMySQL {
             ps = conn.prepareStatement(insert);
             ps.setInt(1,factura_producto.getIdFactura());
             ps.setInt(2, factura_producto.getIdProducto());
-            ps.setInt(2, factura_producto.getCantidad());
+            ps.setInt(3, factura_producto.getCantidad());
             if (ps.executeUpdate() == 0) {
                 throw new Exception("No se pudo insertar");
             }
