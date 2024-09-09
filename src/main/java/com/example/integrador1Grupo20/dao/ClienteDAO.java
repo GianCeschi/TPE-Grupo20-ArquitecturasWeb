@@ -1,5 +1,6 @@
 package com.example.integrador1Grupo20.dao;
 
+import com.example.integrador1Grupo20.dto.ClienteDTO;
 import com.example.integrador1Grupo20.entities.Cliente;
 
 import java.sql.Connection;
@@ -16,23 +17,27 @@ public class ClienteDAO {
         this.conn = conn;
     }
 
-    public List<Cliente> selectList() {
-        String query = "SELECT * " +
-                "FROM Cliente ";
+    public List<ClienteDTO> getClientesMayorFacturacion() {
+        String query = "SELECT c.nombre ,SUM(fp.cantidad * P.valor) facturacion, F.idCliente " +
+                       "FROM Factura_Producto fp " +
+                       "JOIN Producto P ON fp.idProducto = P.idProducto " +
+                       "JOIN Factura F ON fp.idFactura = F.idFactura " +
+                       "JOIN Cliente c ON F.idCliente = c.idCliente " +
+                       "GROUP BY F.idCliente " +
+                       "ORDER BY facturacion DESC";
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<Cliente> listado = new ArrayList<Cliente>();;
+        List<ClienteDTO> listado = new ArrayList<ClienteDTO>();;
         try {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
             // Crear una nueva instancia de Cliente con los datos recuperados de la consulta
             while (rs.next()) { // Verificar si hay resultados
-                int idCliente = rs.getInt("idCliente");
                 String nombre = rs.getString("nombre");
-                String email = rs.getString("email");
+                Float facturacion = rs.getFloat("facturacion");
 
-                Cliente cliente = new Cliente(idCliente, nombre, email);
-                listado.add(cliente);
+                ClienteDTO clienteDTO = new ClienteDTO(nombre, facturacion);
+                listado.add(clienteDTO);
             }
         } catch (SQLException e) {
             e.printStackTrace();
