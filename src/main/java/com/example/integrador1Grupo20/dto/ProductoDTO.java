@@ -1,29 +1,34 @@
 package com.example.integrador1Grupo20.dto;
 
 public class ProductoDTO {
-    private  String nombre;
-    private float recaudacion;
+    private int idProducto;
+    private String nombre;
+    private float valor;
 
-    public ProductoDTO(String nombre, float recaudacion) {
+    public ProductoDTO(int idProducto, String nombre, float valor) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
-        this.recaudacion = recaudacion;
+        this.valor = valor;
+    }
+
+    public int getIdProducto() {
+        return idProducto;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-
-    public float getRecaudacion() {
-        return recaudacion;
+    public float getValor() {
+        return valor;
     }
-
 
     @Override
     public String toString() {
         return "ProductoDTO{" +
-                "nombre='" + nombre + '\'' +
-                ", recaudacion=" + recaudacion +
+                "idProducto=" + idProducto +
+                ", nombre='" + nombre + '\'' +
+                ", valor=" + valor +
                 '}';
     }
 }
