@@ -1,7 +1,9 @@
 package com.example.integrador1Grupo20;
 
 import com.example.integrador1Grupo20.dao.ClienteDAO;
+import com.example.integrador1Grupo20.dao.FacturaProductoDAO;
 import com.example.integrador1Grupo20.dao.ProductoDAO;
+import com.example.integrador1Grupo20.entities.Factura_Producto;
 import com.example.integrador1Grupo20.entities.Producto;
 import com.example.integrador1Grupo20.factory.AbstractFactory;
 import com.example.integrador1Grupo20.utils.HelperMySQL;
@@ -45,6 +47,23 @@ public class Main {
 
         productoDAO.deleteProducto(1001);
         System.out.println(productoDAO.findProductoDTO(1001));
+
+        System.out.println();
+        System.out.println("////////////////////////////////////////////");
+        System.out.println("////////////////////////////////////////////");
+        System.out.println("dao de factura-producto ");
+
+        FacturaProductoDAO facturaProductoDAO = chosenFactory.getFacturaProductoDAO();
+
+        Factura_Producto fp1 = new Factura_Producto(1000,1,500);
+        facturaProductoDAO.insertFacturaProducto(fp1);
+
+        fp1.setCantidad(600);
+        facturaProductoDAO.updateFacturaProducto(fp1);
+
+        facturaProductoDAO.deleteFacturaProducto(1000,1);
+
+
 
 
 
