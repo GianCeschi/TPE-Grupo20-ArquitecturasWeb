@@ -1,18 +1,12 @@
 package com.example.integrador1Grupo20.dto;
 
 public class ProductoDTO {
-    private int idProducto;
     private String nombre;
     private float valor;
 
-    public ProductoDTO(int idProducto, String nombre, float valor) {
-        this.idProducto = idProducto;
+    public ProductoDTO(String nombre, float valor) {
         this.nombre = nombre;
         this.valor = valor;
-    }
-
-    public int getIdProducto() {
-        return idProducto;
     }
 
     public String getNombre() {
@@ -26,8 +20,7 @@ public class ProductoDTO {
     @Override
     public String toString() {
         return "ProductoDTO{" +
-                "idProducto=" + idProducto +
-                ", nombre='" + nombre + '\'' +
+                "nombre='" + nombre + '\'' +
                 ", valor=" + valor +
                 '}';
     }

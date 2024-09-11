@@ -58,11 +58,10 @@ public class ProductoDAO {
             rs = ps.executeQuery();
             // Crear una nueva instancia de Producto con los datos recuperados de la consulta
             while (rs.next()) { // Verificar si hay resultados
-                int idProducto = rs.getInt("idProducto");
                 String nombre = rs.getString("nombre");
                 Float valor = rs.getFloat("valor");
 
-                ProductoDTO productoDTO = new ProductoDTO(idProducto, nombre, valor);
+                ProductoDTO productoDTO = new ProductoDTO(nombre, valor);
                 listado.add(productoDTO);
             }
         } catch (SQLException e) {
@@ -98,7 +97,7 @@ public class ProductoDAO {
                 Float valor = rs.getFloat("valor");
 
                 // Crear una nueva instancia de ProductoDTO con los datos recuperados de la consulta
-                ProductoDTO productoDTO = new ProductoDTO(pk, nombre, valor);
+                ProductoDTO productoDTO = new ProductoDTO(nombre, valor);
                 return productoDTO;
             }
         } catch (SQLException e) {

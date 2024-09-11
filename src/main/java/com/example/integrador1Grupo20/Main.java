@@ -1,9 +1,5 @@
 package com.example.integrador1Grupo20;
 
-//import com.example.ejemplodaoypatrones.dao.DireccionDAO;
-//import com.example.ejemplodaoypatrones.dao.PersonaDAO;
-//import com.example.ejemplodaoypatrones.dto.PersonaDTO;
-//import com.example.ejemplodaoypatrones.factory.AbstractFactory;
 import com.example.integrador1Grupo20.dao.ClienteDAO;
 import com.example.integrador1Grupo20.dao.ProductoDAO;
 import com.example.integrador1Grupo20.entities.Producto;
@@ -15,11 +11,11 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        HelperMySQL dbMySQL = new HelperMySQL();
-        dbMySQL.dropTables();
-        dbMySQL.createTables();
-        dbMySQL.populateDB();
-        dbMySQL.closeConnection();
+        //HelperMySQL dbMySQL = new HelperMySQL();
+        //dbMySQL.dropTables();
+        //dbMySQL.createTables();
+        //dbMySQL.populateDB();
+        //dbMySQL.closeConnection();
 
         AbstractFactory chosenFactory = AbstractFactory.getDAOFactory(1);
         System.out.println();
