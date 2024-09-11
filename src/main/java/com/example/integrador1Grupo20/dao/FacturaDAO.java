@@ -105,7 +105,7 @@ public class FacturaDAO {
 			if (rs.next()) { // Verificar si hay resultados
 				int idCliente = rs.getInt("idCliente");
 
-				// Crear una nueva instancia de Persona con los datos recuperados de la consulta
+				// Crear una nueva instancia de Factura  con los datos recuperados de la consulta
 				facturaById = new FacturaDTO(idCliente);
 			}
 		} catch (SQLException e) {
@@ -134,7 +134,7 @@ public class FacturaDAO {
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
-			// Crear una nueva instancia de Persona con los datos recuperados de la consulta
+			// Crear una lista de Facturas con los datos recuperados de la consulta
 			listado = new ArrayList<FacturaDTO>();
 			while (rs.next()) { // Verificar si hay resultados
 				int idCliente = rs.getInt("idCliente");
