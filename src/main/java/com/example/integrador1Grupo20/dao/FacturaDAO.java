@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.integrador1Grupo20.dto.FacturaDTO;
 import com.example.integrador1Grupo20.entities.Factura;
 
 public class FacturaDAO {
@@ -89,11 +90,11 @@ public class FacturaDAO {
 		}
 	}
 
-	public Factura find(Integer pk) {
+	public FacturaDTO findFacturaDTO(Integer pk) {
 		String query = "SELECT f.idCliente " +
 				"FROM Factura f " +
 				"WHERE f.idFactura = ?";
-		Factura facturaById = null;
+		FacturaDTO facturaById = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -105,7 +106,7 @@ public class FacturaDAO {
 				int idCliente = rs.getInt("idCliente");
 
 				// Crear una nueva instancia de Persona con los datos recuperados de la consulta
-				facturaById = new Factura(pk, idCliente);
+				facturaById = new FacturaDTO(idCliente);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -124,21 +125,20 @@ public class FacturaDAO {
 	}
 
 
-	public List<Factura> selectListFacturas() {
+	public List<FacturaDTO> getFacturas() {
 		String query = "SELECT * " +
 				"FROM Factura ";
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<Factura> listado = null;
+		List<FacturaDTO> listado = null;
 		try {
 			ps = conn.prepareStatement(query);
 			rs = ps.executeQuery();
 			// Crear una nueva instancia de Persona con los datos recuperados de la consulta
-			listado = new ArrayList<Factura>();
+			listado = new ArrayList<FacturaDTO>();
 			while (rs.next()) { // Verificar si hay resultados
-				int idFactura = rs.getInt("idFactura");
 				int idCliente = rs.getInt("idCliente");
-				Factura factura = new Factura(idFactura, idCliente);
+				FacturaDTO factura = new FacturaDTO(idCliente);
 				listado.add(factura);
 			}
 		} catch (SQLException e) {
