@@ -22,7 +22,7 @@ public class ProductoDAO {
       “recaudación” como cantidad de productos vendidos multiplicado por su valor*/
 
     public ProductoMayorRecaudacionDTO productoMasRecaudo() throws SQLException {
-        String query = "SELECT P.nombre, count(fp.idProducto) * P.valor recaudacion " +
+        String query = "SELECT P.nombre, SUM(fp.cantidad * P.valor) recaudacion " +
                 "FROM Factura_Producto fp " +
                 "JOIN Producto P on fp.idProducto = P.idProducto " +
                 "GROUP BY fp.idProducto " +
