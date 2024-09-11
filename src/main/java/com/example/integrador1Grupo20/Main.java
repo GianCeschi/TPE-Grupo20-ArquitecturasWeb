@@ -3,6 +3,7 @@ package com.example.integrador1Grupo20;
 import com.example.integrador1Grupo20.dao.ClienteDAO;
 import com.example.integrador1Grupo20.dao.FacturaProductoDAO;
 import com.example.integrador1Grupo20.dao.ProductoDAO;
+import com.example.integrador1Grupo20.entities.Cliente;
 import com.example.integrador1Grupo20.entities.Factura_Producto;
 import com.example.integrador1Grupo20.entities.Producto;
 import com.example.integrador1Grupo20.factory.AbstractFactory;
@@ -13,20 +14,31 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        HelperMySQL dbMySQL = new HelperMySQL();
-        dbMySQL.dropTables();
-        dbMySQL.createTables();
-        dbMySQL.populateDB();
-        dbMySQL.closeConnection();
+//        HelperMySQL dbMySQL = new HelperMySQL();
+//        dbMySQL.dropTables();
+//        dbMySQL.createTables();
+//        dbMySQL.populateDB();
+//        dbMySQL.closeConnection();
 
         AbstractFactory chosenFactory = AbstractFactory.getDAOFactory(1);
         System.out.println();
         System.out.println("////////////////////////////////////////////");
-        System.out.println("////////////////////////////////////////////");
+        System.out.println("////////////////////  CONSIGNA 3  ////////////////////////");
         System.out.println("Producto mayor recaudación: ");
 
         ProductoDAO productoDAO = chosenFactory.getProductoDAO();
         System.out.println(productoDAO.productoMasRecaudo());
+
+
+        System.out.println();
+        System.out.println("////////////////////////////////////////////");
+        System.out.println("////////////////////  CONSIGNA 4  ////////////////////////");
+        System.out.println("Listado de clientes ordenados por mayor facturación");
+
+        ClienteDAO clienteDAO = chosenFactory.getClienteDAO();
+        System.out.println(clienteDAO.getClientesMayorFacturacion());
+
+        /*
 
         System.out.println();
         System.out.println("////////////////////////////////////////////");
@@ -67,18 +79,13 @@ public class Main {
 
 
 
-        System.out.println();
-        System.out.println("////////////////////////////////////////////");
-        System.out.println("////////////////////////////////////////////");
-        System.out.println("Listado de clientes ordenados por mayor facturación");
 
-        ClienteDAO clienteDAO = chosenFactory.getClienteDAO();
-        System.out.println(clienteDAO.getClientesMayorFacturacion());
+        Cliente cliente = new Cliente(500,"Pablo", "pablito@gmail.com");
+        clienteDAO.insertCliente(cliente);
 
-//        Cliente cliente = new Cliente(500,"Pablo", "pablito@gmail.com");
-//        clienteDAO.insertCliente(cliente);
-//
-//        cliente.setNombre("Gianluca");
-//        clienteDAO.updateCliente(cliente);
+        cliente.setNombre("Gianluca");
+        clienteDAO.updateCliente(cliente);
+
+         */
     }
 }
