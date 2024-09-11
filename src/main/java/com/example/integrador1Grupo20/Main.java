@@ -6,6 +6,7 @@ package com.example.integrador1Grupo20;
 //import com.example.ejemplodaoypatrones.factory.AbstractFactory;
 import com.example.integrador1Grupo20.dao.ClienteDAO;
 import com.example.integrador1Grupo20.dao.ProductoDAO;
+import com.example.integrador1Grupo20.entities.Cliente;
 import com.example.integrador1Grupo20.factory.AbstractFactory;
 import com.example.integrador1Grupo20.utils.HelperMySQL;
 
@@ -37,6 +38,13 @@ public class Main {
 
         ClienteDAO clienteDAO = chosenFactory.getClienteDAO();
         System.out.println(clienteDAO.getClientesMayorFacturacion());
+
+        Cliente cliente = new Cliente(500,"Pablo", "pablito@gmail.com");
+        clienteDAO.insertCliente(cliente);
+
+        cliente.setNombre("Gianluca");
+        clienteDAO.updateCliente(cliente);
+
         /*
         DireccionDAO direccion = chosenFactory.getDireccionDAO();
         PersonaDAO persona = chosenFactory.getPersonaDAO();
