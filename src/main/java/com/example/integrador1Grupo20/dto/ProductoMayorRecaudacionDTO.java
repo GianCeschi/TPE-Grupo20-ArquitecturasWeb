@@ -1,10 +1,10 @@
 package com.example.integrador1Grupo20.dto;
 
-public class ProductoDTO {
+public class ProductoMayorRecaudacionDTO {
     private  String nombre;
     private float recaudacion;
 
-    public ProductoDTO(String nombre, float recaudacion) {
+    public ProductoMayorRecaudacionDTO(String nombre, float recaudacion) {
         this.nombre = nombre;
         this.recaudacion = recaudacion;
     }

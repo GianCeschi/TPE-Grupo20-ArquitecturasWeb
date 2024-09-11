@@ -1,6 +1,6 @@
 package com.example.integrador1Grupo20.dao;
 
-import com.example.integrador1Grupo20.dto.ProductoDTO;
+import com.example.integrador1Grupo20.dto.ProductoMayorRecaudacionDTO;
 import com.example.integrador1Grupo20.entities.Producto;
 
 import java.sql.Connection;
@@ -18,7 +18,7 @@ public class ProductoDAO {
     /*3)Escriba un programa JDBC que retorne el producto que más recaudó. Se define
       “recaudación” como cantidad de productos vendidos multiplicado por su valor*/
 
-    public ProductoDTO productoMasRecaudo() throws SQLException {
+    public ProductoMayorRecaudacionDTO productoMasRecaudo() throws SQLException {
         String query = "SELECT P.nombre, count(fp.idProducto) * P.valor recaudacion " +
                         "FROM Factura_Producto fp " +
                         "JOIN Producto P on fp.idProducto = P.idProducto " +
@@ -36,7 +36,7 @@ public class ProductoDAO {
             String nombre = rs.getString("nombre");
             float recaudacion = rs.getFloat("recaudacion");
 
-            ProductoDTO prodDTO = new ProductoDTO(nombre,recaudacion);
+            ProductoMayorRecaudacionDTO prodDTO = new ProductoMayorRecaudacionDTO(nombre,recaudacion);
 
             return prodDTO;
         }
