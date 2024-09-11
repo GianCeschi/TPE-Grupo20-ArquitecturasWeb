@@ -1,6 +1,6 @@
 package com.example.integrador1Grupo20.dao;
 
-import com.example.integrador1Grupo20.dto.ClienteDTO;
+import com.example.integrador1Grupo20.dto.ClienteMayorFacturacionDTO;
 import com.example.integrador1Grupo20.entities.Cliente;
 
 import java.sql.Connection;
@@ -17,8 +17,8 @@ public class ClienteDAO {
         this.conn = conn;
     }
 
-    public List<ClienteDTO> getClientesMayorFacturacion() {
-        String query = "SELECT c.nombre ,SUM(fp.cantidad * P.valor) facturacion, F.idCliente " +
+    public List<ClienteMayorFacturacionDTO> getClientesMayorFacturacion() {
+        String query = "SELECT c.nombre ,SUM(fp.cantidad * P.valor) facturacion " +
                        "FROM Factura_Producto fp " +
                        "JOIN Producto P ON fp.idProducto = P.idProducto " +
                        "JOIN Factura F ON fp.idFactura = F.idFactura " +
@@ -27,7 +27,7 @@ public class ClienteDAO {
                        "ORDER BY facturacion DESC";
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<ClienteDTO> listado = new ArrayList<ClienteDTO>();;
+        List<ClienteMayorFacturacionDTO> listado = new ArrayList<ClienteMayorFacturacionDTO>();;
         try {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();
@@ -36,7 +36,7 @@ public class ClienteDAO {
                 String nombre = rs.getString("nombre");
                 Float facturacion = rs.getFloat("facturacion");
 
-                ClienteDTO clienteDTO = new ClienteDTO(nombre, facturacion);
+                ClienteMayorFacturacionDTO clienteDTO = new ClienteMayorFacturacionDTO(nombre, facturacion);
                 listado.add(clienteDTO);
             }
         } catch (SQLException e) {
@@ -54,9 +54,81 @@ public class ClienteDAO {
                 e.printStackTrace();
             }
         }
-
         return listado;
     }
-
-
+    
+    public void insertCliente(Cliente cliente){
+        String query = "INSERT INTO Cliente (idCliente,nombre,email) VALUES (?,?,?)";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, cliente.getIdCliente()); // idCliente
+            ps.setString(2, cliente.getNombre()); // nombre
+            ps.setString(3, cliente.getEmail()); // email
+            ps.executeUpdate();
+            System.out.println("Cliente insertado exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    public void updateCliente(Cliente cliente){
+        String query = "UPDATE Cliente SET nombre = ?, email = ? WHERE idCliente = ?";
+        PreparedStatement ps = null;
+        
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, cliente.getNombre()); // nombre
+            ps.setString(2, cliente.getEmail()); // email
+            ps.setInt(3, cliente.getIdCliente()); // idCliente
+            ps.executeUpdate();
+            System.out.println("Cliente actualizado exitosamente.");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    
+    }
+    
+    public Boolean deleteCliente(Integer id){
+        String query = "DELETE FROM Cliente WHERE idCliente = ?";
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id); // idCliente
+            ps.executeUpdate();
+            System.out.println("Cliente eliminado exitosamente.");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }
