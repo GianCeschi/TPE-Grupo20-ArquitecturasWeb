@@ -52,7 +52,7 @@ public class ProductoDAO {
                 "FROM Producto ";
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<ProductoDTO> listado = new ArrayList<ProductoDTO>();;
+        List<ProductoDTO> listado = new ArrayList<ProductoDTO>();
         try {
             ps = conn.prepareStatement(query);
             rs = ps.executeQuery();

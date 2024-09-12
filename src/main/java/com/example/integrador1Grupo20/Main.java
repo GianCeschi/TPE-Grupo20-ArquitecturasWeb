@@ -1,6 +1,7 @@
 package com.example.integrador1Grupo20;
 
 import com.example.integrador1Grupo20.dao.ClienteDAO;
+import com.example.integrador1Grupo20.dao.FacturaDAO;
 import com.example.integrador1Grupo20.dao.FacturaProductoDAO;
 import com.example.integrador1Grupo20.dao.ProductoDAO;
 import com.example.integrador1Grupo20.entities.Cliente;
@@ -8,17 +9,16 @@ import com.example.integrador1Grupo20.entities.Factura_Producto;
 import com.example.integrador1Grupo20.entities.Producto;
 import com.example.integrador1Grupo20.factory.AbstractFactory;
 import com.example.integrador1Grupo20.utils.HelperMySQL;
-
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) throws Exception {
-//        HelperMySQL dbMySQL = new HelperMySQL();
-//        dbMySQL.dropTables();
-//        dbMySQL.createTables();
-//        dbMySQL.populateDB();
-//        dbMySQL.closeConnection();
+        HelperMySQL dbMySQL = new HelperMySQL();
+        dbMySQL.dropTables();
+        dbMySQL.createTables();
+        dbMySQL.populateDB();
+        dbMySQL.closeConnection();
 
         AbstractFactory chosenFactory = AbstractFactory.getDAOFactory(1);
         System.out.println();
@@ -38,7 +38,34 @@ public class Main {
         ClienteDAO clienteDAO = chosenFactory.getClienteDAO();
         System.out.println(clienteDAO.getClientesMayorFacturacion());
 
+
+
         /*
+        ///////////////    GRUPO 20     ///////////////
+
+        INTEGRANTES:
+            Gianluca Ceschinelli
+            Paulo Alvarez
+            Josefina Belaunzaran
+            Manuel Cerdeira
+            Pablo Andersen
+
+
+        Se entrega una sola copia por ZIP
+
+        **** Codigo comentado, utilizado para realizar pruebas locales.****
+
+        System.out.println("prueba Pablo");
+
+        System.out.println(clienteDAO.findClienteDTO(18));
+        System.out.println(clienteDAO.getClientes());
+
+        System.out.println("prueba Gian");
+        FacturaDAO facturaDAO = chosenFactory.getFacturaDAO();
+
+        System.out.println(facturaDAO.findFacturaDTO(1));
+        System.out.println(facturaDAO.getFacturas());
+
 
         System.out.println();
         System.out.println("////////////////////////////////////////////");
@@ -75,17 +102,11 @@ public class Main {
 
         facturaProductoDAO.deleteFacturaProducto(1000,1);
 
-
-
-
-
-
         Cliente cliente = new Cliente(500,"Pablo", "pablito@gmail.com");
         clienteDAO.insertCliente(cliente);
 
         cliente.setNombre("Gianluca");
         clienteDAO.updateCliente(cliente);
-
          */
     }
 }

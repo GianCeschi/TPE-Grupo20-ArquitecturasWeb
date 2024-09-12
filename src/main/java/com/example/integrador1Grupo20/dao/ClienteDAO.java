@@ -1,7 +1,10 @@
 package com.example.integrador1Grupo20.dao;
 
+import com.example.integrador1Grupo20.dto.ClienteDTO;
 import com.example.integrador1Grupo20.dto.ClienteMayorFacturacionDTO;
+import com.example.integrador1Grupo20.dto.ProductoDTO;
 import com.example.integrador1Grupo20.entities.Cliente;
+import com.example.integrador1Grupo20.entities.Producto;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -130,5 +133,74 @@ public class ClienteDAO {
                 e.printStackTrace();
             }
         }
+    }
+
+    public ClienteDTO findClienteDTO(Integer pk) {
+        String query = "SELECT nombre, email " +
+                "FROM Cliente " +
+                "WHERE idCliente = ?";
+        ClienteDTO clienteDTO = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, pk); // Establecer el parámetro en la consulta SQL
+            rs = ps.executeQuery();
+            if (rs.next()) { // Verificar si hay resultados
+                String nombre = rs.getString("nombre");
+                String email = rs.getString("email");
+
+                // Crear una nueva instancia de ClienteDTO con los datos recuperados de la consulta
+                clienteDTO = new ClienteDTO(nombre, email);
+                return clienteDTO;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return clienteDTO;  //es null
+    }
+
+    public List<ClienteDTO> getClientes() {
+        String query = "SELECT * " +
+                "FROM Cliente ";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<ClienteDTO> listado = new ArrayList<ClienteDTO>();
+        try {
+            ps = conn.prepareStatement(query);
+            rs = ps.executeQuery();
+            // Crear una nueva instancia de Cliente con los datos recuperados de la consulta
+            while (rs.next()) { // Verificar si hay resultados
+                String nombre = rs.getString("nombre");
+                String email = rs.getString("email");
+
+                ClienteDTO clienteDTO = new ClienteDTO(nombre, email);
+                listado.add(clienteDTO);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                conn.commit();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return listado;
     }
 }
